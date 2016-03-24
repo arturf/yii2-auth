@@ -142,9 +142,9 @@ class Module extends \yii\base\Module
      */
     public function beforeAction($action)
     {
-        if (!Yii::$app->authManager->isAdmin() && !empty($this->accessFilterBehavior)) {
+        if (!Yii::$app->user->isAdmin() && !empty($this->accessFilterBehavior)) {
             $action->controller->attachBehavior('accessFilter', $this->accessFilterBehavior);
-        } elseif (!Yii::$app->authManager->isAdmin() && !Yii::$app->authManager->checkRoute()) {
+        } elseif (!Yii::$app->user->isAdmin() && !Yii::$app->authManager->checkRoute()) {
             throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
         }
 
